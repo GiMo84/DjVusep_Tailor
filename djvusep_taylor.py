@@ -99,6 +99,9 @@ def main(inputdir, outputfile, resolution, cr_cjb2, cr_c44, temp_dir, keep_temp,
         outputfile = os.path.join(inputdir, "output.djvu")
         logger.info(f"Using output file: {outputfile}")
 
+    if os.path.exists(outputfile):
+        click.confirm(f"Output file {outputfile} already exists. Do you want to continue?", abort=True)
+
     temp_dir_obj = None
     if temp_dir is None:
         temp_dir_obj = tempfile.TemporaryDirectory(prefix="djvu_temp_")
@@ -189,6 +192,9 @@ def main(inputdir, outputfile, resolution, cr_cjb2, cr_c44, temp_dir, keep_temp,
 
     # Assemble all pages into a single DjVu file
     if pages:
+        if os.path.exists(outputfile):
+            logger.debug("Removing old output file.")
+            os.remove(outputfile)
         run_command(["djvm", "-c", outputfile] + pages)
         logger.info(f"DjVu file '{outputfile}' created successfully!")
         if not keep_temp and temp_dir_obj is not None:
