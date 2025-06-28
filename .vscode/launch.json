@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Assemble DJVU",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["-v", "DEBUG", "-t", "1", "test_images/", "djvu", "-r", "600", "-o", "test_images/out.djvu"],
+        },
+        {
+            "name": "Assemble PDF",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["-v", "DEBUG", "-t", "1", "test_images/", "pdf", "-r", "600", "-o", "test_images/out.pdf"],
+        }
+    ]
+}
